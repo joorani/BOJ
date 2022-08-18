@@ -33,9 +33,10 @@ for _ in range(n):
             continue
 
 #tmp에 남은 원소 붙여주기
-if tmp:
-    stack.extend(list(reversed(tmp)))
+# if tmp:
+#     stack.extend(list(reversed(tmp)))
 
+# for x in stack:
+#     print(x, end='')
 
-for x in stack:
-    print(x, end='')
+print("".join(stack + list(reversed(tmp))))
