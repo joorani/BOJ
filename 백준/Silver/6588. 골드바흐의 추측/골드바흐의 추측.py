@@ -1,22 +1,24 @@
-def isPrime(n):
-    i = 2
-    while i * i <= n:
-        if n % i == 0:
-            return False
-        i += 1
-    return True
+max_num = 1000001
 
+
+def eratos(n):
+    ch = [True for _ in range(n)]
+    for i in range(2, n):
+        if ch[i]:
+            for j in range(i*i, n, i):
+                ch[j] = False
+    return ch
+arr = eratos(max_num)
 while True:
     n = int(input())
     if n == 0:
         break
-    else:
-        a = 2
-        while a < n:
-            if isPrime(a) and isPrime(n - a):
-                print(f'{n} = {a} + {n-a}')
-                break
-            a += 1
-        else:
-            print("Goldbach's conjecture is wrong.")
-
+    flag = 0
+    # n을 포함하지 않는 n까지 소수 리스트
+    for a in range(3, n):
+        if arr[a] and arr[n-a]:
+            print(f'{n} = {a} + {n-a}')
+            flag = 1
+            break
+    if flag == 0:
+        print("Goldbach's conjecture is wrong.")
