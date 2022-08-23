@@ -1,14 +1,16 @@
+def isPrime2(n):
+    i = 2
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
+
 n = int(input())
-data = list(map(int, input().split()))
-
+a = list(map(int, input().split()))
 cnt = 0
-for num in data:
-    if num == 1:
-       continue
-    for i in range(2, num):
-        if num % i == 0:
-            break
-    else:
+for x in a:
+    if isPrime2(x) and x != 1:
         cnt+= 1
-
+        
 print(cnt)
