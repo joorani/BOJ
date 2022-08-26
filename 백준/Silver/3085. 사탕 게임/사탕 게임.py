@@ -17,47 +17,38 @@ ABC
 # 옆에 있는 사탕이랑 바꾸는 경우
 import copy
 
-
 def rightChange(x, y, board):
     board[x][y], board[x][y + 1] = board[x][y + 1], board[x][y]  # switch
     return board
-
 
 # 아래 있는 사탕이랑 바꾸는 경우
 def downChange(x, y, board):
     board[x][y], board[x + 1][y] = board[x + 1][y], board[x][y]
     return board
 
-# 전체 테이블의 행을 탐색하는 함수
-def hSearch(board):
+# 행, 열을 탐색하는 함수
+def search(board):
     tmp = 1
     for i in range(n):
-        start = board[i][0]
+        # 행 탐색
         cnt = 1
         for j in range(1, n):
-            if board[i][j] == start:
+            if board[i][j] == board[i][j-1]:
                 cnt += 1
-                tmp = max(tmp, cnt)
             else:
-                start = board[i][j]
                 cnt = 1
-    return tmp
+            tmp = max(tmp, cnt)
 
-# 전체 테이블의 열을 탐색하는 함수
-def ySearch(board):
-    tmp = 1
-    for i in range(n):
-        start = board[0][i]
+        # 열 탐색
         cnt = 1
         for j in range(1, n):
-            if board[j][i] == start:
+            if board[j][i] == board[j-1][i]:
                 cnt += 1
-                tmp = max(tmp, cnt)
             else:
-                start = board[j][i]
                 cnt = 1
-    return tmp
+            tmp = max(tmp, cnt)
 
+    return tmp
 
 if __name__ == '__main__':
 
@@ -73,9 +64,9 @@ if __name__ == '__main__':
         for y in range(n-1):
             board = copy.deepcopy(candy)
             switchedRight = rightChange(x, y, board)
-            result = max(result, hSearch(switchedRight), ySearch(switchedRight))
+            result = max(result, search(switchedRight))
 
             switchedDown = downChange(y, x, board)
-            result = max(result, hSearch(switchedDown), ySearch(switchedDown))
+            result = max(result, search(switchedDown))
 
     print(result)
