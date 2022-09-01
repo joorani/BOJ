@@ -1,19 +1,12 @@
-
-def DFS(L, s):
-    if L == m:
-        for x in res:
-            print(x, end= ' ')
-        print()
-    else:
-        for i in range(s, n):
-            res[L] = data[i]
-            DFS(L+1, i+1)
-
+import itertools as it
 if __name__ == '__main__':
 
     n, m = map(int, input().split())
     data = list(map(int, input().split()))
 
     data.sort()
-    res = [0] * m
-    DFS(0, 0)
+
+    for x in it.combinations(data, m):
+        for a in x:
+            print(a, end= ' ')
+        print()
