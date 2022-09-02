@@ -8,6 +8,7 @@ def DFS(L, sum):
             DFS(L+time[L], sum+p[L])
         DFS(L+1, sum)
 
+
 if __name__ == '__main__':
     n = int(input())
     time = []
@@ -17,6 +18,5 @@ if __name__ == '__main__':
         time.append(t)
         p.append(money)
     res = 0
-    for i in range(n):
-        DFS(i, 0)
+    DFS(0, 0)
     print(res)
