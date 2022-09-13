@@ -29,8 +29,8 @@ def cal(index, a, b):
     elif index == 2:
         return a * b
     else:
-        if a< 0 and b >0:
-            return -(abs(a) // abs(b))
+        if a< 0:
+            return -(abs(a) // b)
         return a//b
 
 dfs(1, numbers[0])
