@@ -1,39 +1,31 @@
-'''
+''''
 연산자 끼워넣기
-
-주어진 연산자 순열로
-
 '''
-
 
 n = int(input())
-data = list(map(int, input().split()))
-operator = list(map(int, input().split())) #연산자 순서대로
+numbers = list(map(int, input().split()))
+calculator = list(map(int, input().split()))
 
-# 최대값, 최솟값 초기화
-max_value = -1e9
-min_value = 1e9
+max_res = -1e9
+min_res = 1e9
 
-def DFS(L, now):
-    global min_value, max_value
+def dfs(L, now):
+    global max_res, min_res
     if L == n:
-        min_value = min(min_value, now)
-        max_value = max(max_value, now)
+        max_res = max(max_res, now)
+        min_res = min(min_res, now)
     else:
-        # 덧셈, 뺼셈, 곱셈, 나눈셈
         for i in range(4):
-            if operator[i] != 0:
-                operator[i]-= 1 # 사용했으면 1개씩 뺴준다.
-                tmp=calculator(i, now, data[L])
-                DFS(L+1, tmp)
-                operator[i] += 1
+            if calculator[i] != 0:
+                calculator[i] -=1
+                dfs(L+1, cal(i, now, numbers[L]))
+                calculator[i] += 1
 
-
-def calculator(index, a, b):
+def cal(index, a, b):
     if index == 0:
         return a+b
     elif index == 1:
-        return a - b
+        return a -b
     elif index == 2:
         return a * b
     else:
@@ -41,7 +33,6 @@ def calculator(index, a, b):
             return -(abs(a) // abs(b))
         return a//b
 
-DFS(1, data[0])
-print(max_value)
-print(min_value)
-
+dfs(1, numbers[0])
+print(max_res)
+print(min_res)
