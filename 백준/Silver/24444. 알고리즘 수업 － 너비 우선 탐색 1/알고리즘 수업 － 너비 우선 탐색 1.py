@@ -2,32 +2,33 @@
 BFS
 '''
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 n, m, r = map(int, input().split())
-graph = [[] for _ in range(n+1)]
+g = [[] for _ in range(n+1)]
 for _ in range(m):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    g[a].append(b)
+    g[b].append(a) #무방향 그래프이기 때문에 양쪽에 넣어줘야함.
 
-for g in graph:
-    g.sort()
+visited = [0] * (n+1) # 방문 순서 기록, cnt를 저장할 테이블임
+cnt = 1 #방문 순서를 기록할 변수
+dq = deque()
 
+def bfs():
+    global cnt
+    while dq:
+        now = dq.popleft()
+        g[now].sort()
+        for i in g[now]:
+            if visited[i] == 0:
+                cnt+= 1
+                visited[i] = cnt
+                dq.append(i)
 
-visited = [0] * (n+1)
-path = deque()
-path.append(r)
-cnt = 1
 visited[r] = cnt
-while path:
-    now = path.popleft()
-    for node in graph[now]:
-        if visited[node] == 0:
-            cnt += 1
-            visited[node] = cnt
-            path.append(node)
-
-# 출력
-for i in range(1, n+1):
-    print(visited[i])
-
+dq.append(r) #시작 노드 추가
+bfs()
+for x in range(1, n+1):
+    print(visited[x])
