@@ -1,3 +1,4 @@
+
 def eratos(n):
     ch = [False for _ in range(n+1)]
     res = [] #소수를 담은 테이블
