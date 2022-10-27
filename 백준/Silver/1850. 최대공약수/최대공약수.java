@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -14,8 +13,9 @@ public class Main {
         long g = gcd(a, b);
         //최대 공약수만큼 1반복해 출력하기
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        for (int i = 0; i < g; i++) {
+        while (g > 0) {
             bw.write("1");
+            g--;
         }
         bw.flush();
         bw.close();
